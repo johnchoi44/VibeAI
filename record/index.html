@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<i class="fa fa-microphone" id="icon-record-audio" onclick="recordAudio()" style="cursor: pointer;"></i>
+
+<script>
+
+    let recorder = null
+
+    // function to record audio
+    async function recordAudio() {
+        // get permission to access microphone
+        navigator.permissions.query({name: 'microphone'})
+            .then(function (permissionObj) {
+                console.log(permissionObj.state)
+            })
+            .catch(function (error) {
+                console.log('Got error :', error);
+            })
+    
+        // get recorder object
+        recorder = await doRecordAudio()
+ 
+        // start audio
+        recorder.start()
+    }
+
+function doRecordAudio() {
+    return new Promise(function (resolve) {
+        // get user audio media
+        navigator.mediaDevices.getUserMedia({
+            audio: true
+        })
+        .then(function (stream) {
+            // [media recorder goes here]
+        })
+    })
+}
+
+</script>
