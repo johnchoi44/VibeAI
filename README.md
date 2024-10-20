@@ -1,5 +1,6 @@
 # VibeAI
 
+For demo,
 1. run 'node server.js' on terminal 
 2. type anything on the textbox
 3. click Generate Speech
