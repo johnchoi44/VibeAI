@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.post('/generate-speech', async (req, res) => {
     const { text, voice } = req.body;  // Get the text and selected voice from the form
     console.log('Received text:', text);
-    console.log('Selected voice:', voice);  // Log the selected voice for debugging
+    console.log('Selected voice ID:', voice);  // Log the selected voice for debugging
 
     try {
         // Call the PlayHt function with the selected voice
@@ -85,7 +85,7 @@ app.get('/voices', async (req, res) => {
         // Populate the dropdown with the available voices
         voices.forEach(voice => {
             voicesHtml += `
-                <option value="${voice.manifest_file}">${voice.name} (${voice.language} - ${voice.gender})</option>
+                <option value="${voice.id}">${voice.name} (${voice.language} - ${voice.gender} - ${voice.accent})</option>
             `;
         });
 
