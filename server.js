@@ -14,16 +14,70 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files like CSS (optional)
 app.use(express.static('public'));
 
-// Route for the homepage
-app.get('/', (req, res) => {
-    res.send(`
-        <h1>Play.ht Feature for Tech2Speech Integration</h1>
-        <form action="/generate-speech" method="POST">
-            <label for="text">Enter Text:</label><br>
-            <textarea id="text" name="text" rows="4" cols="50" placeholder="Enter the text you want to convert to speech"></textarea><br><br>
-            <button type="submit">Generate Speech</button>
-        </form>
-    `);
+app.get('/', async (req, res) => {
+    const options = {
+        method: 'GET',
+        url: 'https://api.play.ht/api/v2/voices',
+        headers: {
+            accept: 'application/json',
+            AUTHORIZATION: process.env.PLAY_HT_API_KEY,
+            'X-USER-ID': process.env.PLAY_HT_X_USER_ID,
+        },
+    };
+
+    const options2 = {
+        method: 'GET',
+        url: 'https://api.play.ht/api/v2/cloned-voices',
+        headers: {
+            accept: 'application/json',
+            AUTHORIZATION: process.env.PLAY_HT_API_KEY,
+            'X-USER-ID': process.env.PLAY_HT_X_USER_ID,
+        },
+    };
+
+    try {
+        const response = await axios.request(options);
+        const response2 = await axios.request(options2);
+        const voices = response.data;
+        const cvoices = response2.data;
+
+        // Build a form with a dropdown of voices
+        let voicesHtml = `
+            <h1>Select a Voice</h1>
+            <form action="/generate-speech" method="POST">
+                <label for="text">Enter Text:</label><br>
+                <textarea id="text" name="text" rows="4" cols="50" placeholder="Enter the text you want to convert to speech"></textarea><br><br>
+
+                <label for="voice">Select Voice:</label><br>
+                <select id="voice" name="voice">
+        `;
+
+        // Populate the dropdown with the available voices
+        cvoices.forEach(voice => {
+            voicesHtml += `
+                <option value="${voice.id}">Cloned - ${voice.name} - ${voice.gender}</option>
+            `;
+        });
+
+        voices.forEach(voice => {
+            voicesHtml += `
+                <option value="${voice.id}">${voice.name} (${voice.language} - ${voice.gender} - ${voice.accent}</option>
+            `;
+        });
+
+        voicesHtml += `
+                </select><br><br>
+                <button type="submit">Generate Speech</button>
+            </form>
+            <br><a href="/">Go back</a>
+        `;
+
+        res.send(voicesHtml);
+
+    } catch (error) {
+        console.error('Error fetching voices:', error.response ? error.response.data : error.message);
+        res.status(500).send('Error fetching voices');
+    }
 });
 
 // Route to handle the form submission and Play.ht integration
@@ -54,57 +108,6 @@ app.post('/generate-speech', async (req, res) => {
         }
     }
 });
-
-
-app.get('/voices', async (req, res) => {
-    const options = {
-        method: 'GET',
-        url: 'https://api.play.ht/api/v2/voices',
-        headers: {
-            accept: 'application/json',
-            AUTHORIZATION: process.env.PLAY_HT_API_KEY,
-            'X-USER-ID': process.env.PLAY_HT_X_USER_ID,
-        },
-    };
-
-    try {
-        const response = await axios.request(options);
-        const voices = response.data;
-
-        // Build a form with a dropdown of voices
-        let voicesHtml = `
-            <h1>Select a Voice</h1>
-            <form action="/generate-speech" method="POST">
-                <label for="text">Enter Text:</label><br>
-                <textarea id="text" name="text" rows="4" cols="50" placeholder="Enter the text you want to convert to speech"></textarea><br><br>
-
-                <label for="voice">Select Voice:</label><br>
-                <select id="voice" name="voice">
-        `;
-
-        // Populate the dropdown with the available voices
-        voices.forEach(voice => {
-            voicesHtml += `
-                <option value="${voice.id}">${voice.name} (${voice.language} - ${voice.gender} - ${voice.accent})</option>
-            `;
-        });
-
-        voicesHtml += `
-                </select><br><br>
-                <button type="submit">Generate Speech</button>
-            </form>
-            <br><a href="/">Go back</a>
-        `;
-
-        res.send(voicesHtml);
-
-    } catch (error) {
-        console.error('Error fetching voices:', error.response ? error.response.data : error.message);
-        res.status(500).send('Error fetching voices');
-    }
-});
-
-
 
 app.get('/cvoices', async (req, res) => {
     const options = {
