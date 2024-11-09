@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/fonts/file.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'CustomFont', sans-serif;
+}
+
+footer {
+  width: 100%;
+  padding: 10px;
+  background-color: #1e1e3f;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}

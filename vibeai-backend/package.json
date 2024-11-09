@@ -1,0 +1,37 @@
+{
+  "name": "vibeai-backend",
+  "version": "1.0.0",
+  "description": "vibeAI project for DS440",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index",
+    "predev": "kill-port 8080",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnchoi44/VibeAI.git"
+  },
+  "author": "Group 11",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnchoi44/VibeAI/issues"
+  },
+  "homepage": "https://github.com/johnchoi44/VibeAI#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "opus-media-recorder": "^0.8.0",
+    "path": "^0.12.7",
+    "playht": "^0.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

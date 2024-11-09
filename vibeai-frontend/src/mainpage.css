@@ -1,0 +1,57 @@
+.main-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(assets/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    color: white;
+    text-align: center;
+  }
+  
+  .main-content {
+    max-width: 100%;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .main-content .title {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 9rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    text-indent: -500px;
+  }
+  
+  .main-content .subtitle {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    text-align: left;
+    text-indent: 500px;
+    margin-top: 10px;
+    overflow: hidden;
+    white-space: normal;
+  }
+  
+  .generate-button {
+    margin-top: 50px;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+  }
+  
+  .generate-button:hover {
+    background: white;
+    color: #1e1e3f;
+  }

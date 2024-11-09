@@ -1,0 +1,9 @@
+{
+    "name": "vibeai",
+    "scripts": {
+        "start": "concurrently \"npm run dev --prefix vibeai-frontend\" \"npm run dev --prefix vibeai-backend\""
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0"
+    }
+}
