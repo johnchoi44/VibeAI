@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Song Cover Generator</title>
+</head>
+<body>
+    <h1>AI Song Cover Generator</h1>
+    <select id="voiceDropdown">
+        <option value="">Select a voice</option>
+    </select>
+    <input type="file" id="fileInput" accept="audio/*">
+    <button id="submitButton">Generate Cover</button>
+    <div id="selectedVoice"></div>
+    <div id="responseOutput"></div>
+    <audio id="audioPlayer" controls style="display:none;"></audio>
+    <a id="downloadLink" href="#" download style="display:none;">Download</a>
+
+    <script>
+        // Fetch voices and populate dropdown
+        fetch('/api/voices')
+            .then(response => response.json())
+            .then(data => {
+                const dropdown = document.getElementById('voiceDropdown');
+                data.forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice.id;
+                    option.textContent = voice.artist;
+                    dropdown.appendChild(option);
+                });
+
+                dropdown.addEventListener('change', () => {
+                    const selectedVoice = dropdown.options[dropdown.selectedIndex];
+                    document.getElementById('selectedVoice').textContent = 
+                        `Selected Voice: ${selectedVoice.textContent}, ID: ${selectedVoice.value}`;
+                });
+            })
+            .catch(err => console.error('Error fetching voices:', err));
+
+        // Handle form submission
+        document.getElementById('submitButton').addEventListener('click', () => {
+            const dropdown = document.getElementById('voiceDropdown');
+            const fileInput = document.getElementById('fileInput');
+            const voiceId = dropdown.value;
+
+            if (!fileInput.files[0] || !voiceId) {
+                alert('Please select a file and a voice.');
+                return;
+            }
+
+            const form = new FormData();
+            form.append("file", fileInput.files[0]);
+            form.append("voice_id", voiceId);
+
+            fetch('/api/convert-voice', {
+                method: 'POST',
+                body: form
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data received from server:', data);
+
+                // file_url이 제대로 반환되었는지 확인하고, 오디오와 다운로드 링크 설정
+                if (Array.isArray(data) && data.length > 0 && data[0].file_url) {
+                    const fileUrl = data[0].file_url;
+                    const audioPlayer = document.getElementById('audioPlayer');
+                    const downloadLink = document.getElementById('downloadLink');
+
+                    audioPlayer.src = fileUrl;
+                    audioPlayer.style.display = 'block';
+                    audioPlayer.play();
+
+                    downloadLink.href = fileUrl;
+                    downloadLink.style.display = 'inline';
+                } else {
+                    document.getElementById('responseOutput').textContent = 'Audio file not generated.';
+                    console.error('File URL not found in server response:', data);
+                }
+            })
+            .catch(err => {
+                console.error('Error during voice conversion:', err);
+                document.getElementById('responseOutput').textContent = 'Error during voice conversion.';
+            });
+        });
+    </script>
+</body>
+</html>
