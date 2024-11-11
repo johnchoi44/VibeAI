@@ -1,4 +1,4 @@
-// 필요한 모듈 불러오기
+
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
@@ -9,25 +9,24 @@ import FormData from 'form-data';
 const app = express();
 const PORT = 3000;
 
-// API 키 설정 (실제 키로 대체)
+
 const apiKey = 'cm352t7890033l20cvxmi4trw';
 
-// CORS 설정
+
 app.use(cors());
 
-// multer를 사용해 파일 업로드 설정
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// 정적 파일 제공
+
 app.use(express.static(path.join(process.cwd(), '../vibeai-frontend', 'public')));
 
-// 기본 경로('/')에서 Musicindex.html 서빙
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), '../vibeai-frontend', 'public', 'Musicindex.html'));
 });
 
-// 목소리 목록 가져오는 API 엔드포인트
 app.get('/api/voices', (req, res) => {
     const options = {
         method: 'GET',
@@ -43,7 +42,6 @@ app.get('/api/voices', (req, res) => {
         .catch(err => res.status(500).json({ error: err.message }));
 });
 
-// 음성 변환 API 엔드포인트
 app.post('/api/convert-voice', upload.single('file'), (req, res) => {
     console.log('Received file:', req.file);
     console.log('Received voice ID:', req.body.voice_id);
@@ -86,7 +84,6 @@ app.post('/api/convert-voice', upload.single('file'), (req, res) => {
         .catch(err => res.status(500).json({ error: err.message }));
 });
 
-// 서버 시작
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -7,6 +7,9 @@ import GeneratePage from './GeneratePage';
 import SpeechPage from './SpeechPage'
 import CreatemodelPage from './CreatemodelPage'
 import ManageVoice from './ManageVoice'
+import AISongCoverGenerator from './AISongCoverGenerator'
+
+import OurModel from './OurModel'
 
 import Footer from './Footer';
 
@@ -20,6 +23,8 @@ function App() {
           <Route path="/speechtotext" element={<SpeechPage />} />
           <Route path="/createmodel" element={<CreatemodelPage />} />
           <Route path="/cloned-voices" element={<ManageVoice />} />
+          <Route path="/aisongcovergenerator" element={<AISongCoverGenerator />} />
+          <Route path="/ourmodel" element={<OurModel />} />
         </Routes>
         <Footer />
     </Router>

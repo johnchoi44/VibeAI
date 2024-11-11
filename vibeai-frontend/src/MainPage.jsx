@@ -34,12 +34,17 @@ function MainPage() {
     }
   };
 
+  const handleOurModelClick = () => {
+      navigate('/ourmodel');
+  };
+
   return (
     <div className="main-page">
       <div className="main-content">
         <h1 className="title">VIBE.AI</h1>
         <p className="subtitle">where your voice meets </p>
         <p className="subtitle">infinite possibility</p>
+        <button onClick={handleOurModelClick} className="generate-button">Our Model</button>
         <button onClick={handleGenerateClick} className="generate-button">Get Started</button>
 
         <Popup open={showPopup} closeOnDocumentClick={false}>

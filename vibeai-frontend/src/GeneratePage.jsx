@@ -5,10 +5,6 @@ import textPic from './assets/text.png';
 import musicPic from './assets/music.png';
 
 function GeneratePage() {
-  const handleCreateSongClick = () => {
-    // localhost:3000으로 이동
-    window.location.href = 'http://localhost:3000';
-  };
 
   return (
     <div className="generate-page">
@@ -26,13 +22,15 @@ function GeneratePage() {
           </div>
         </Link>
         
-        <div className="option" onClick={handleCreateSongClick}>
-          <div className="image-wrapper">
-            <img src={musicPic} alt="Create Your Song" className="option-image" />
+        <Link to="/aisongcovergenerator">
+          <div className="option">
+              <div className="image-wrapper">
+                <img src={musicPic} alt="Create Your Song" className="option-image"></img>
+              </div>
+            <h3>Create your song</h3>
+            <p>Upload a song, choose a model, and create a personalized version of the track.</p>
           </div>
-          <h3>Create your song</h3>
-          <p>Upload a song, choose a model, and create a personalized version of the track.</p>
-        </div>
+        </Link>
       </div>
     </div>
   );

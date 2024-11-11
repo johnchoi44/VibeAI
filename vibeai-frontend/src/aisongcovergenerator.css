@@ -1,0 +1,106 @@
+.song-cover-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-image: url(assets/AItextbackground.jpg);
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.song-cover-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.input-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #b7caf5;
+    text-align: left;
+}
+
+.page-title {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.voice-dropdown {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.selected-voice {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.file-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.submit-button {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background-color: #007B9E;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.audio-output {
+    margin-top: 20px;
+}
+
+.audio-player {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.download-link {
+    display: block;
+    color: #008CBA;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.download-link:hover {
+    color: #005f7a;
+}
