@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "kill-port 5173",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

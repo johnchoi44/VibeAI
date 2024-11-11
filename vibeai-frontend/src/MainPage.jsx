@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './mainpage.css'
 import Popup from 'reactjs-popup';
 
-const CONTRACT_VERSION = "1.4"; // change this version when you want the popup to show again
+const CONTRACT_VERSION = "1.5"; // change this version when you want the popup to show again
 
 function MainPage() {
   const navigate = useNavigate();

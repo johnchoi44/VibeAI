@@ -1,0 +1,116 @@
+.speech-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-image: url(assets/back1.jpg);
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.page-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.speech-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.text-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    resize: vertical;
+}
+
+.voice-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.generate-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.generate-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.generate-button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.loading-text {
+    color: #dcdcdc;
+    font-style: italic;
+}
+
+.speech-output {
+    margin-top: 20px;
+}
+
+.output-title {
+    font-size: 20px;
+    color: #dcdcdc;
+}
+
+.output-text {
+    font-size: 16px;
+    color: #dcdcdc;
+}
+
+.audio-player {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.nav-button {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    margin: 3px;
+}
+
+.nav-button:hover {
+    background-color: #007B9E;
+}

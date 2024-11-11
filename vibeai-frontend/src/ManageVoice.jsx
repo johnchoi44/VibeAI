@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './managevoice.css';
 
 function ManageVoice() {
     const [voices, setVoices] = useState([]);
@@ -8,7 +9,6 @@ function ManageVoice() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch cloned voices from the backend
         const fetchVoices = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/cloned-voices');
@@ -24,10 +24,7 @@ function ManageVoice() {
 
     const handleDelete = async (cloneId) => {
         try {
-            // Send a POST request to delete the selected voice model
             await axios.post('http://localhost:8080/delete-voice', { cloneId });
-            
-            // Remove the deleted voice from the state to update the list
             setVoices((prevVoices) => prevVoices.filter((voice) => voice.id !== cloneId));
         } catch (error) {
             console.error('Error deleting cloned voice:', error);
@@ -36,25 +33,23 @@ function ManageVoice() {
     };
 
     return (
-        <div>
-            <h1>Cloned Voices</h1>
+        <div className="manage-voice-page">
+            <div className='manage-voice-container'>
+                <h1 className="page-title">Cloned Voices</h1>
 
-            {/* Error Message */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p className="error-message">{error}</p>}
 
-            {/* List of Cloned Voices */}
-            <ul>
-                {voices.map((voice) => (
-                    <li key={voice.id}>
-                        <strong>Name:</strong> {voice.name} ({voice.gender})<br />
-                        <button onClick={() => handleDelete(voice.id)}>Delete Model</button>
-                    </li>
-                ))}
-            </ul>
+                <ul className="voice-list">
+                    {voices.map((voice) => (
+                        <li key={voice.id} className="voice-item">
+                            <strong className="voice-name">Name:</strong> {voice.name} ({voice.gender})<br />
+                            <button onClick={() => handleDelete(voice.id)} className="delete-button">Delete Model</button>
+                        </li>
+                    ))}
+                </ul>
 
-            <br />
-            {/* Go Back Button */}
-            <button onClick={() => navigate('/speechtotext')}>Go Back</button>
+                <button onClick={() => navigate('/speechtotext')} className="back-button">Go Back</button>
+            </div>
         </div>
     );
 }

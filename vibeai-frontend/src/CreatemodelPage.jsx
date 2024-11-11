@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ReactMediaRecorder } from 'react-media-recorder';
+import './createmodel.css';
 
 function CreatemodelPage() {
     const navigate = useNavigate();
@@ -95,33 +96,31 @@ function CreatemodelPage() {
     };
 
     return (
-        <div>
-            {/* Go Back Button */}
-            <button onClick={() => navigate('/speechtotext')}>Go Back</button>
+        <div className="createmodel-page">
+            <h1 className="page-title">Create Voice Model</h1>
 
-            <h1>Create Voice Model</h1>
-
-            {/* Conditionally Render Upload or Record Section */}
             {!showRecordingSection ? (
                 <>
-                    <form onSubmit={handleSubmitFile}>
-                        <h2>Upload MP3 File to Create Voice Model</h2>
-                        <label>
+                    <form className="upload-form" onSubmit={handleSubmitFile}>
+                        <h2 className="form-title">Upload MP3 File to Create Voice Model</h2>
+                        <label className="form-label">
                             Model Name:
                             <input
                                 type="text"
                                 value={modelName}
                                 onChange={(e) => setModelName(e.target.value)}
                                 required
+                                className="text-input"
                             />
                         </label>
                         <br />
-                        <label>
+                        <label className="form-label">
                             Language:
                             <select
                                 value={language}
                                 onChange={(e) => setLanguage(e.target.value)}
                                 required
+                                className="select-input"
                             >
                                 <option value="English">English</option>
                                 <option value="Korean">Korean</option>
@@ -130,45 +129,54 @@ function CreatemodelPage() {
                             </select>
                         </label>
                         <br />
-                        <label>
+                        <label className="form-label">
                             Gender:
                             <select
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
+                                className="select-input"
                             >
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
                         </label>
                         <br />
-                        <label>
+                        <label className="form-label">
                             Upload MP3 File:
-                            <input type="file" accept=".mp3,.ogg" onChange={handleFileChange} required />
+                            <input
+                                type="file"
+                                accept=".mp3,.ogg,.wav"
+                                onChange={handleFileChange}
+                                required
+                                className="file-input"
+                            />
                         </label>
                         <br />
-                        <button type="submit">Create Model</button>
+                        <button type="submit" className="submit-button">Create Model</button>
                     </form>
-                    <button onClick={() => setShowRecordingSection(true)}>Record Your Own Voice</button>
+                    <button onClick={() => setShowRecordingSection(true)} className="record-button">Record Your Own Voice</button>
                 </>
             ) : (
                 <>
-                    <h2>Record Your Voice</h2>
-                    <label>
+                    <h2 className="form-title">Record Your Voice</h2>
+                    <label className="form-label">
                         Model Name:
                         <input
                             type="text"
                             value={modelName}
                             onChange={(e) => setModelName(e.target.value)}
                             required
+                            className="text-input"
                         />
                     </label>
                     <br />
-                    <label>
+                    <label className="form-label">
                         Language:
                         <select
                             value={language}
                             onChange={(e) => setLanguage(e.target.value)}
                             required
+                            className="select-input"
                         >
                             <option value="English">English</option>
                             <option value="Korean">Korean</option>
@@ -177,11 +185,12 @@ function CreatemodelPage() {
                         </select>
                     </label>
                     <br />
-                    <label>
+                    <label className="form-label">
                         Gender:
                         <select
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
+                            className="select-input"
                         >
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -192,33 +201,34 @@ function CreatemodelPage() {
                         audio
                         onStop={onStop}
                         render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
-                            <div>
-                                <p>{status}</p>
-                                <button 
-                                    onClick={() => { startHandle(); startRecording(); }} 
-                                    disabled={isRunning}
-                                >
-                                    Start Recording
-                                </button>
-                                <button 
-                                    onClick={() => { stopHandle(mediaBlobUrl); stopRecording(); }} 
-                                    disabled={!isRunning}
-                                >
-                                    Stop Recording
-                                </button><br />
-                                {mediaBlobUrl && <audio src={mediaBlobUrl} autoPlay controls></audio>}
+                            <><p className="status-text">{status}</p>
+                            <div className="record-section">
+                                <div className='record-button-container'>
+                                    <button onClick={() => { startHandle(); startRecording(); }} disabled={isRunning} className="start-button">
+                                        Start Recording
+                                    </button>
+                                    <button onClick={() => { stopHandle(mediaBlobUrl); stopRecording(); }} disabled={!isRunning} className="stop-button">
+                                        Stop Recording
+                                    </button><br />
+                                </div>
+                                {mediaBlobUrl && <audio src={mediaBlobUrl} autoPlay controls className="audio-player"></audio>}
                                 <br />
-                                <button onClick={() => updateHandle(mediaBlobUrl)} disabled={!mediaBlobUrl}>Use this recording</button>
-                                <br />
-                                <button onClick={handleSubmitRecording} disabled={!recordBlobLink}>Create Model from Recording</button>
+                                <div className='nav-button-container'>
+                                    <button onClick={() => updateHandle(mediaBlobUrl)} disabled={!mediaBlobUrl} className="use-recording-button">Use this recording</button>
+                                    <br />
+                                    <button onClick={handleSubmitRecording} disabled={!recordBlobLink} className="submit-recording-button">Create Model from Recording</button>
+                                </div>
                             </div>
+                            </>
                         )}
                     />
                 </>
-            )}
+            )} <br /><br />
 
-            {loadingMessage && <p>{loadingMessage}</p>}
-            {resultMessage && <div dangerouslySetInnerHTML={{ __html: resultMessage }} />}
+            {loadingMessage && <p className="loading-message">{loadingMessage}</p>}
+            {resultMessage && <div className="result-message" dangerouslySetInnerHTML={{ __html: resultMessage }} />}
+
+            <button className="back-button" onClick={() => navigate('/speechtotext')}>Go Back</button>
         </div>
     );
 }

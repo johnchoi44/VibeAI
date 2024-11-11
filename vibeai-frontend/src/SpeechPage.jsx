@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import './speech.css';
 
 function SpeechPage() {
     const [clonedVoices, setClonedVoices] = useState([]);
@@ -7,7 +8,7 @@ function SpeechPage() {
     const [text, setText] = useState('');
     const [selectedVoice, setSelectedVoice] = useState('');
     const [speechUrl, setSpeechUrl] = useState('');
-    const [loading, setLoading] = useState(false); // New loading state
+    const [loading, setLoading] = useState(false);
 
     const fetchAPI = async () => {
         const response = await axios.get("http://localhost:8080/");
@@ -21,33 +22,30 @@ function SpeechPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Text:', text);
-        console.log('Selected Voice ID:', selectedVoice);
-
-        setLoading(true); // Set loading to true when starting the request
-        setSpeechUrl(''); // Clear the previous URL
+        setLoading(true);
+        setSpeechUrl('');
 
         try {
             const response = await axios.post('http://localhost:8080/generate-speech', 
                 { text, voice: selectedVoice }, 
                 { headers: { 'Content-Type': 'application/json' } }
             );
-            console.log('Generated Speech URL:', response.data.speechUrl);
             setSpeechUrl(response.data.speechUrl);
         } catch (error) {
             console.error('Error generating speech:', error);
         } finally {
-            setLoading(false); // Set loading to false when the request completes
+            setLoading(false);
         }
     };
 
     return (
-        <div>
-            <h1>Select a Voice</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="text">Enter Text:</label><br />
+        <div className="speech-page">
+            <h1 className="page-title">Select a Voice</h1>
+            <form className="speech-form" onSubmit={handleSubmit}>
+                <label className="form-label" htmlFor="text">Enter Text:</label><br />
                 <textarea 
                     id="text" 
+                    className="text-input" 
                     name="text" 
                     rows="4" 
                     cols="50" 
@@ -56,9 +54,10 @@ function SpeechPage() {
                     onChange={(e) => setText(e.target.value)}
                 ></textarea><br /><br />
   
-                <label htmlFor="voice">Select Voice:</label><br />
+                <label className="form-label" htmlFor="voice">Select Voice:</label><br />
                 <select 
                     id="voice" 
+                    className="voice-select" 
                     name="voice" 
                     value={selectedVoice} 
                     onChange={(e) => setSelectedVoice(e.target.value)}
@@ -72,35 +71,34 @@ function SpeechPage() {
                     ))}
                 </select><br /><br />
   
-                <button type="submit" disabled={!selectedVoice}>Generate Speech</button>
+                <button className="generate-button" type="submit" disabled={!selectedVoice}>Generate Speech</button>
             </form><br />
 
-            {/* Show loading message while speech is being generated */}
-            {loading && <p>Generating speech, please wait...</p>}
+            {loading && <p className="loading-text">Generating speech, please wait...</p>}
   
-            {/* Display the generated speech when available */}
             {speechUrl && !loading && (
-                <div>
-                    <h1>Speech Generated</h1><br />
-                    <p>Text: {text}</p><br />
-                    <audio controls>
+                <div className="speech-output">
+                    <h1 className="output-title">Speech Generated</h1><br />
+                    <p className="output-text">Text: {text}</p><br />
+                    <audio className="audio-player" controls>
                         <source src={speechUrl} type="audio/mpeg" />
                         Your browser does not support the audio tag.
                     </audio><br /><br />
                 </div>
             )}
 
-            <a href="/createmodel">
-                <button>Create Voice Model</button>
-            </a>
-            <br /><br />
-            <a href="/cloned-voices">
-                <button>Manage Cloned Voices</button>
-            </a> <br /><br />
+            <div className="button-container">
+                <a href="/">
+                    <button className="nav-button">Home</button>
+                </a>
+                <a href="/createmodel">
+                    <button className="nav-button">Create Voice Model</button>
+                </a>
+                <a href="/cloned-voices">
+                    <button className="nav-button">Manage Cloned Voices</button>
+                </a>
 
-            <a href="/">
-                <button>Home</button>
-            </a>
+            </div>
         </div>
     );
 }

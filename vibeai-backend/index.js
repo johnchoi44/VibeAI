@@ -78,11 +78,11 @@ app.post('/generate-speech', async (req, res) => {
     console.log('Selected voice ID:', voice);
 
     try {
-        // Call the PlayHt function with the selected voice
+        // call the PlayHt function with the selected voice
         const speechUrl = await PlayHt(text, voice);  // Assume this function returns the URL of the generated speech
         console.log('Generated speech URL:', speechUrl);
 
-        // Send both text and URL as a JSON response
+        // send both text and URL as a JSON response
         res.json({ text, speechUrl });
     } catch (error) {
         console.error('Error generating speech:', error);
