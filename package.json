@@ -3,7 +3,7 @@
     "homepage": "https://johnchoi44.github.io/VibeAI",
     "scripts": {
         "predeploy":"concurrently \"npm run dev --prefix vibeai-frontend\" \"npm run dev --prefix vibeai-backend\"",
-        "deployt": "gh-pages -d build",
+        "deploy": "gh-pages -d build",
         "start": "concurrently \"npm run dev --prefix vibeai-frontend\" \"npm run dev --prefix vibeai-backend\""
     },
     "devDependencies": {
