@@ -71,7 +71,7 @@ function SpeechPage() {
                     ))}
                 </select><br /><br />
   
-                <button className="generate-button" type="submit" disabled={!selectedVoice}>Generate Speech</button>
+                <button className="speech-generate-button" type="submit" disabled={!selectedVoice}>Generate Speech</button>
             </form><br />
 
             {loading && <p className="loading-text">Generating speech, please wait...</p>}

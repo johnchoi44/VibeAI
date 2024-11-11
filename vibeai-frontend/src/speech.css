@@ -50,7 +50,7 @@
     border: 1px solid #ddd;
 }
 
-.generate-button {
+.speech-generate-button {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -60,12 +60,12 @@
     transition: background-color 0.3s;
 }
 
-.generate-button:disabled {
+.speech-generate-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
 
-.generate-button:hover:not(:disabled) {
+.speech-generate-button:hover:not(:disabled) {
     background-color: #45a049;
 }
 
