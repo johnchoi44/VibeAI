@@ -19,3 +19,31 @@ footer p {
   margin: 0;
   font-size: 0.9rem;
 }
+
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  padding: 20px;
+  /* background-color: rgba(44, 50, 228, 0.3); */
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.header-title {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Shadow for readability */
+}
+
+.header-title:hover {
+  transform: scale(1.02);
+}
+

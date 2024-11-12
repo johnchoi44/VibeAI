@@ -12,7 +12,7 @@ function GeneratePage() {
         <h1 className="title">Generate</h1>
       </div>
       <div className="options-container">
-        <Link to="/speechtotext">
+        <Link className="speechtotext" to="/speechtotext">
           <div className="option">
             <div className="image-wrapper">
               <img src={textPic} alt="Read for You" className="option-image" />
@@ -22,7 +22,7 @@ function GeneratePage() {
           </div>
         </Link>
         
-        <Link to="/aisongcovergenerator">
+        <Link className="aisongcovergenerator" to="/aisongcovergenerator">
           <div className="option">
               <div className="image-wrapper">
                 <img src={musicPic} alt="Create Your Song" className="option-image"></img>

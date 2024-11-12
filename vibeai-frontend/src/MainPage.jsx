@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './mainpage.css'
 import Popup from 'reactjs-popup';
 
-const CONTRACT_VERSION = "1.5"; // change this version when you want the popup to show again
+const CONTRACT_VERSION = "1.0"; // change this version when you want the popup to show again
 
 function MainPage() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function MainPage() {
 
   const handleGenerateClick = () => {
     if (isSigned) {
-      navigate('/generate');
+      navigate('/ourmodel');
     } else {
       setShowPopup(true);
     }
@@ -44,7 +44,7 @@ function MainPage() {
         <h1 className="title">VIBE.AI</h1>
         <p className="subtitle">where your voice meets </p>
         <p className="subtitle">infinite possibility</p>
-        <button onClick={handleOurModelClick} className="generate-button">Our Model</button>
+        {/* <button onClick={handleOurModelClick} className="generate-button">Our Model</button> */}
         <button onClick={handleGenerateClick} className="generate-button">Get Started</button>
 
         <Popup open={showPopup} closeOnDocumentClick={false}>

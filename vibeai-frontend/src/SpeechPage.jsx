@@ -88,16 +88,15 @@ function SpeechPage() {
             )}
 
             <div className="button-container">
-                <a href="/">
-                    <button className="nav-button">Home</button>
-                </a>
                 <a href="/createmodel">
                     <button className="nav-button">Create Voice Model</button>
                 </a>
                 <a href="/cloned-voices">
                     <button className="nav-button">Manage Cloned Voices</button>
                 </a>
-
+                <a href="/generate">
+                    <button className="nav-button">Go back</button>
+                </a>
             </div>
         </div>
     );

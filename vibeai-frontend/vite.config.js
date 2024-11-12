@@ -6,3 +6,4 @@ export default defineConfig({
   plugins: [react()],
 })
 
+// export default defineConfig({ base: "/VibeAI", plugins: [react()], }) 
