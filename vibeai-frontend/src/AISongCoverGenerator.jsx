@@ -35,6 +35,7 @@ const AISongCoverGenerator = () => {
         }
 
         const formData = new FormData();
+        console.log(file)
         formData.append('file', file);
         formData.append('voice_id', selectedVoice.id);
 
@@ -53,8 +54,8 @@ const AISongCoverGenerator = () => {
                 }
             })
             .catch(err => {
-                console.error('Error during voice conversion:', err);
-                setError('Error during voice conversion.');
+                console.error('Error during voice conversion:', err.message);
+                setError('Error during voice consersion');
             });
     };
 
@@ -62,6 +63,7 @@ const AISongCoverGenerator = () => {
         <div className="song-cover-page">
             <div className="song-cover-container">
                 <h1 className="page-title">AI Song Cover Generator</h1>
+                <p class="warning">The file name must not contain spaces or special characters!</p>
                 <div className="input-container">
                     <select
                         id="voiceDropdown"

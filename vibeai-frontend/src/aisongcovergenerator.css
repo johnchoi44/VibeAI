@@ -104,3 +104,11 @@
 .download-link:hover {
     color: #005f7a;
 }
+
+.warning {
+    color: red;
+    font-size: 1em;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}

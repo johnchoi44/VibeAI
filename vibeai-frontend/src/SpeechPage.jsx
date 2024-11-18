@@ -9,11 +9,17 @@ function SpeechPage() {
     const [selectedVoice, setSelectedVoice] = useState('');
     const [speechUrl, setSpeechUrl] = useState('');
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const fetchAPI = async () => {
-        const response = await axios.get("http://localhost:8080/");
-        setClonedVoices(response.data.clonedVoices);
-        setAvailableVoices(response.data.availableVoices); 
+        try {
+            const response = await axios.get("http://localhost:8080/");
+            setClonedVoices(response.data.clonedVoices);
+            setAvailableVoices(response.data.availableVoices); 
+        } catch (error) {
+            setErrorMessage(error);
+        }
+        
     };
 
     useEffect(() => {
@@ -24,6 +30,7 @@ function SpeechPage() {
         e.preventDefault();
         setLoading(true);
         setSpeechUrl('');
+        setErrorMessage('');
 
         try {
             const response = await axios.post('http://localhost:8080/generate-speech', 
@@ -33,6 +40,9 @@ function SpeechPage() {
             setSpeechUrl(response.data.speechUrl);
         } catch (error) {
             console.error('Error generating speech:', error);
+            setErrorMessage(
+                error.response?.data?.error || 'An unexpected error occured. Please try again.'
+            );
         } finally {
             setLoading(false);
         }
@@ -75,6 +85,8 @@ function SpeechPage() {
             </form><br />
 
             {loading && <p className="loading-text">Generating speech, please wait...</p>}
+
+            {errorMessage && <p className='error-message'>{errorMessage}</p>}
   
             {speechUrl && !loading && (
                 <div className="speech-output">

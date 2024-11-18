@@ -114,3 +114,9 @@
 .nav-button:hover {
     background-color: #007B9E;
 }
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 15px;
+}
