@@ -20,7 +20,7 @@ const corsOptions = {
     origin: ["http://localhost:5173"],
 };
 
-const apiKey = 'cm352t7890033l20cvxmi4trw';
+const apiKey = 'cm3byyijn0001mh0cdpiqx4z6';
 
 const convertOpusToOgg = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
@@ -38,8 +38,9 @@ app.use(cors());
 app.use(express.json());
 app.use('/upload', express.static('upload'));
 
-const upload = multer({ dest: 'upload/'})
-
+const upload = multer({ dest: 'upload/'});
+const storage = multer.memoryStorage();
+const uploads = multer({ storage: storage});
 
 app.get('/', async (req, res) => {
     const options = {
@@ -181,7 +182,7 @@ app.get('/api/voices', (req, res) => {
         .catch(err => res.status(500).json({ error: err.message }));
 });
 
-app.post('/api/convert-voice', upload.single('file'), (req, res) => {
+app.post('/api/convert-voice', uploads.single('file'), (req, res) => {
     console.log('Received file:', req.file);
     console.log('Received voice ID:', req.body.voice_id);
 

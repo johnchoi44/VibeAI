@@ -50,11 +50,13 @@ const AISongCoverGenerator = () => {
                     setError('');
                 } else {
                     setError('Audio file not generated.');
+                    console.log(responses);
                     console.error('File URL not found in server response:', data);
                 }
             })
             .catch(err => {
                 console.error('Error during voice conversion:', err.message);
+                console.log(responses);
                 setError('Error during voice consersion');
             });
     };
@@ -63,7 +65,7 @@ const AISongCoverGenerator = () => {
         <div className="song-cover-page">
             <div className="song-cover-container">
                 <h1 className="page-title">AI Song Cover Generator</h1>
-                <p class="warning">The file name must not contain spaces or special characters!</p>
+                <p className="warning">The file name must not contain spaces or special characters!</p>
                 <div className="input-container">
                     <select
                         id="voiceDropdown"
